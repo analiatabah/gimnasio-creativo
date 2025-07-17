@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gimnasio Creativo: De Serio a Divertido con LEGO®</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF8;
+            color: #333D51;
+        }
+        .card-transform {
+            transform-style: preserve-3d;
+            transition: transform 0.7s;
+        }
+        .card-transform.flipped {
+            transform: rotateY(180deg);
+        }
+        .card-face {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .card-back {
+            transform: rotateY(180deg);
+        }
+        .tab-button.active {
+            background-color: #F5B841;
+            color: #333D51;
+            font-weight: 700;
+        }
+        .practice-row.expanded .answer-cell {
+            display: table-cell;
+        }
+        .practice-row .answer-cell {
+            display: none;
+        }
+        .chart-container { 
+            position: relative; 
+            width: 100%; 
+            max-width: 500px; 
+            margin-left: auto; 
+            margin-right: auto; 
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) { 
+            .chart-container { 
+                height: 400px; 
+            } 
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="container mx-auto px-4 py-8 md:py-16">
+        
+        <header class="text-center mb-16">
+            <h1 class="text-4xl md:text-6xl font-black text-[#D96C06] mb-2">Gimnasio Creativo</h1>
+            <p class="text-xl md:text-2xl font-semibold text-[#333D51]">De Serio a Divertido con LEGO® SERIOUS PLAY®</p>
+            <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">Una guía interactiva para transformar desafíos complejos en juegos creativos y desbloquear el potencial de tu equipo.</p>
+        </header>
+
+        <main>
+            <section id="porque" class="mb-20">
+                <h2 class="text-3xl font-bold text-center mb-8">¿Por Qué Funciona?</h2>
+                <div class="grid md:grid-cols-3 gap-8 text-center">
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <div class="text-4xl mb-4">🧠💥</div>
+                        <h3 class="text-xl font-bold mb-2">Rompe Patrones</h3>
+                        <p class="text-gray-600">Al pedir algo absurdo, obligas a la mente a abandonar sus caminos lógicos y a explorar rutas creativas completamente nuevas.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <div class="text-4xl mb-4">🛡️😄</div>
+                        <h3 class="text-xl font-bold mb-2">Baja las Defensas</h3>
+                        <p class="text-gray-600">El humor crea un espacio seguro. Si la tarea es construir algo "ridículo", no hay miedo a equivocarse o a ser juzgado.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <div class="text-4xl mb-4">🗣️🤝</div>
+                        <h3 class="text-xl font-bold mb-2">Fomenta la Metáfora</h3>
+                        <p class="text-gray-600">Permite hablar de temas complejos y sensibles de forma indirecta, haciendo que la conversación sea más fácil y productiva.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="gimnasio" class="bg-white rounded-2xl shadow-2xl p-6 md:p-10 mb-20">
+                <h2 class="text-3xl font-bold text-center mb-2">El Gimnasio</h2>
+                <p class="text-center text-gray-600 mb-8">Seleccioná un ejercicio y hacé clic en "Transformar" para ver la magia.</p>
+                
+                <div id="tabs" class="flex justify-center mb-8 border-b-2 border-[#D6C9B8]">
+                    <button data-tab="monstruos" class="tab-button px-4 py-2 text-lg font-semibold rounded-t-lg transition-colors duration-300 active">Monstruos y Héroes</button>
+                    <button data-tab="maquinas" class="tab-button px-4 py-2 text-lg font-semibold rounded-t-lg transition-colors duration-300">Máquinas Locas</button>
+                    <button data-tab="metaforas" class="tab-button px-4 py-2 text-lg font-semibold rounded-t-lg transition-colors duration-300">Traductor de Metáforas</button>
+                </div>
+
+                <div id="tab-content">
+                    <div data-content="monstruos" class="tab-pane active">
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="perspective-1000">
+                                <div class="card-transform w-full h-full min-h-[300px]" data-card="burocracia">
+                                    <div class="card-face absolute w-full h-full bg-[#FDFBF8] border-2 border-[#D6C9B8] rounded-xl p-6 flex flex-col justify-center items-center">
+                                        <p class="text-sm font-semibold text-[#D96C06]">PREGUNTA SERIA</p>
+                                        <p class="text-xl text-center font-bold mt-2">¿Cómo manejamos la burocracia interna?</p>
+                                        <button class="transform-btn mt-6 bg-[#333D51] text-white font-bold py-2 px-6 rounded-full hover:bg-[#F5B841] hover:text-[#333D51] transition-all">Transformar ✨</button>
+                                    </div>
+                                    <div class="card-back absolute w-full h-full bg-[#F5B841] text-[#333D51] rounded-xl p-6 flex flex-col justify-center">
+                                        <p class="text-sm font-semibold">TRANSFORMACIÓN ABSURDA</p>
+                                        <p class="italic text-lg mb-4">La burocracia es un "Dragón de Tres Cabezas hecho de Formularios".</p>
+                                        <p class="text-sm font-semibold">PREGUNTA LEGO DIVERTIDA</p>
+                                        <p class="text-lg font-bold">"Construí al Dragón. ¿Qué come para hacerse más fuerte? ¿Cuál de sus tres cabezas es la más molesta y por qué?"</p>
+                                        <button class="revert-btn mt-4 text-xs font-semibold">Ver original</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-content="maquinas" class="tab-pane hidden">
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="perspective-1000">
+                                <div class="card-transform w-full h-full min-h-[300px]" data-card="ventas">
+                                    <div class="card-face absolute w-full h-full bg-[#FDFBF8] border-2 border-[#D6C9B8] rounded-xl p-6 flex flex-col justify-center items-center">
+                                        <p class="text-sm font-semibold text-[#D96C06]">PROCESO SERIO</p>
+                                        <p class="text-xl text-center font-bold mt-2">Nuestro proceso de venta.</p>
+                                        <button class="transform-btn mt-6 bg-[#333D51] text-white font-bold py-2 px-6 rounded-full hover:bg-[#F5B841] hover:text-[#333D51] transition-all">Transformar ✨</button>
+                                    </div>
+                                    <div class="card-back absolute w-full h-full bg-[#F5B841] text-[#333D51] rounded-xl p-6 flex flex-col justify-center">
+                                        <p class="text-sm font-semibold">TRANSFORMACIÓN ABSURDA</p>
+                                        <p class="italic text-lg mb-4">Es una "Tostadora que intenta lanzar la tostada a un plato al otro lado de la habitación".</p>
+                                        <p class="text-sm font-semibold">PREGUNTA LEGO DIVERTIDA</p>
+                                        <p class="text-lg font-bold">"Diseñá la Tostadora Lanza-Tostadas. ¿Qué pieza hace que salga con más fuerza? ¿Qué ponemos en el suelo por si se cae?"</p>
+                                         <button class="revert-btn mt-4 text-xs font-semibold">Ver original</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-content="metaforas" class="tab-pane hidden">
+                         <div class="grid md:grid-cols-2 gap-8">
+                            <div class="perspective-1000">
+                                <div class="card-transform w-full h-full min-h-[300px]" data-card="presentacion">
+                                    <div class="card-face absolute w-full h-full bg-[#FDFBF8] border-2 border-[#D6C9B8] rounded-xl p-6 flex flex-col justify-center items-center">
+                                        <p class="text-sm font-semibold text-[#D96C06]">SITUACIÓN SERIA</p>
+                                        <p class="text-xl text-center font-bold mt-2">Estamos preparando una presentación importante para un cliente.</p>
+                                        <button class="transform-btn mt-6 bg-[#333D51] text-white font-bold py-2 px-6 rounded-full hover:bg-[#F5B841] hover:text-[#333D51] transition-all">Transformar ✨</button>
+                                    </div>
+                                    <div class="card-back absolute w-full h-full bg-[#F5B841] text-[#333D51] rounded-xl p-6 flex flex-col justify-center">
+                                        <p class="text-sm font-semibold">TRANSFORMACIÓN ABSURDA</p>
+                                        <p class="italic text-lg mb-4">Es como "entrenar a un circo de pulgas para un número de acrobacia increíble".</p>
+                                        <p class="text-sm font-semibold">PREGUNTA LEGO DIVERTIDA</p>
+                                        <p class="text-lg font-bold">"Construí la carpa de tu Circo de Pulgas Acróbatas. ¿Cuál es tu pulga estrella? ¿Y cuál es la pulga rebelde que siempre se escapa?"</p>
+                                        <button class="revert-btn mt-4 text-xs font-semibold">Ver original</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="crear" class="mb-12">
+                <h2 class="text-3xl font-bold text-center mb-2">Crea tu Propia Transformación</h2>
+                <p class="text-center text-gray-600 mb-8">Añadí tu desafío y su versión divertida a la tabla de práctica.</p>
+                <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label for="pregunta-seria" class="block mb-2 font-bold text-[#333D51]">1. La Pregunta Seria o Desafío</label>
+                            <input type="text" id="pregunta-seria" class="w-full p-3 border border-[#D6C9B8] rounded-lg" placeholder="Ej: ¿Cómo mejoramos la comunicación?">
+                        </div>
+                        <div>
+                             <label for="pregunta-divertida" class="block mb-2 font-bold text-[#333D51]">2. La Transformación Divertida</label>
+                            <input type="text" id="pregunta-divertida" class="w-full p-3 border border-[#D6C9B8] rounded-lg" placeholder="Ej: Es un teléfono descompuesto cósmico...">
+                        </div>
+                    </div>
+                    <button id="add-question-btn" class="w-full bg-[#D96C06] text-white font-bold py-3 px-6 rounded-lg hover:bg-[#F5B841] hover:text-[#333D51] transition-all text-lg">
+                        Añadir a la Tabla de Práctica 👇
+                    </button>
+                </div>
+            </section>
+            <section id="practica" class="mb-20">
+                <h2 class="text-3xl font-bold text-center mb-2">¡Ahora te Toca a Vos!</h2>
+                <p class="text-center text-gray-600 mb-8">Hacé clic en cada pregunta para revelar su transformación (¡Las que agregues también aparecerán aquí!).</p>
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <table class="w-full text-left">
+                        <thead class="bg-[#D6C9B8]">
+                            <tr>
+                                <th class="p-4 text-lg font-bold text-[#333D51] w-1/3">Pregunta Seria</th>
+                                <th class="p-4 text-lg font-bold text-[#333D51]">Transformación y Pregunta LEGO Divertida</th>
+                            </tr>
+                        </thead>
+                        <tbody id="practice-table-body">
+                            <tr class="practice-row border-b border-gray-200 cursor-pointer hover:bg-gray-50">
+                                <td class="p-4 font-semibold w-1/3">¿Cómo es nuestro trabajo en equipo?</td>
+                                <td class="p-4 answer-cell"><strong>Transformación:</strong> Es una orquesta donde cada músico cree que está tocando una canción diferente. <br/><strong>Pregunta LEGO:</strong> Construí la orquesta de nuestro equipo. ¿Qué instrumento sos vos? ¿Y qué canción estamos tocando todos juntos sin darnos cuenta?</td>
+                            </tr>
+                             <tr class="practice-row border-b border-gray-200 cursor-pointer hover:bg-gray-50">
+                                <td class="p-4 font-semibold w-1/3">¿Qué riesgo deberíamos tomar?</td>
+                                <td class="p-4 answer-cell"><strong>Transformación:</strong> Es un botón rojo brillante que dice "NO APRETAR". <br/><strong>Pregunta LEGO:</strong> Construí ese gran botón rojo brillante. ¿Qué crees que pasaría si lo apretamos? ¿Qué es lo peor (y lo más divertido) que podría suceder?</td>
+                            </tr>
+                            <tr class="practice-row border-b border-gray-200 cursor-pointer hover:bg-gray-50">
+                                <td class="p-4 font-semibold w-1/3">¿Cómo podemos motivarnos más?</td>
+                                <td class="p-4 answer-cell"><strong>Transformación:</strong> Es una Máquina de Café Cósmica que funciona con sueños y energía. <br/><strong>Pregunta LEGO:</strong> Construí la Máquina de Café Cósmica de la Motivación. ¿Qué 'sueños' la alimentan? ¿Y qué hace que a veces se atasque y produzca 'barro de procrastinación'?</td>
+                            </tr>
+                            <tr class="practice-row border-b border-gray-200 cursor-pointer hover:bg-gray-50">
+                                <td class="p-4 font-semibold w-1/3">Describe a nuestro cliente ideal.</td>
+                                <td class="p-4 answer-cell"><strong>Transformación:</strong> Es una criatura mítica, un Zorro Plateado que vive en las Montañas de Necesidades. <br/><strong>Pregunta LEGO:</strong> Construí al Zorro Plateado. ¿En qué cueva vive? ¿Y qué 'fruta mágica' podemos ofrecerle para que confíe en nosotros?</td>
+                            </tr>
+                            <tr class="practice-row cursor-pointer hover:bg-gray-50">
+                                <td class="p-4 font-semibold w-1/3">¿Cuál es nuestra mayor fortaleza?</td>
+                                <td class="p-4 answer-cell"><strong>Transformación:</strong> Es el superpoder secreto que tiene nuestro equipo. <br/><strong>Pregunta LEGO:</strong> Si nuestro equipo fuera un superhéroe, construí la pieza que representa nuestro superpoder secreto. ¿Cómo funciona? ¿Y cuál es su única (y quizás ridícula) debilidad?</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <section id="ingredientes">
+                <h2 class="text-3xl font-bold text-center mb-8">Ingredientes de una Pregunta Poderosa</h2>
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <div class="chart-container">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- CÓDIGO EXISTENTE PARA TABS Y TARJETAS ---
+            const tabs = document.querySelectorAll('.tab-button');
+            const panes = document.querySelectorAll('.tab-pane');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    const target = tab.getAttribute('data-tab');
+                    panes.forEach(pane => {
+                        if (pane.getAttribute('data-content') === target) {
+                            pane.classList.remove('hidden');
+                        } else {
+                            pane.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+
+            const transformButtons = document.querySelectorAll('.transform-btn');
+            transformButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    btn.closest('.card-transform').classList.add('flipped');
+                });
+            });
+
+            const revertButtons = document.querySelectorAll('.revert-btn');
+            revertButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    btn.closest('.card-transform').classList.remove('flipped');
+                });
+            });
+            
+            // --- CÓDIGO MODIFICADO Y NUEVO ---
+
+            // Selecciono el cuerpo de la tabla para poder añadirle filas
+            const practiceTableBody = document.getElementById('practice-table-body');
+            
+            // Función para hacer que una fila se expanda/contraiga al hacer clic
+            const addToggleFunctionality = (row) => {
+                 row.addEventListener('click', () => {
+                    row.classList.toggle('expanded');
+                });
+            };
+            
+            // Aplico la funcionalidad a las filas que ya existen
+            const initialPracticeRows = document.querySelectorAll('.practice-row');
+            initialPracticeRows.forEach(row => {
+                addToggleFunctionality(row);
+            });
+
+            // Selecciono los elementos del nuevo formulario
+            const addQuestionBtn = document.getElementById('add-question-btn');
+            const seriousQuestionInput = document.getElementById('pregunta-seria');
+            const funQuestionInput = document.getElementById('pregunta-divertida');
+
+            // Evento para el botón "Añadir a la Tabla"
+            addQuestionBtn.addEventListener('click', () => {
+                const seriousText = seriousQuestionInput.value.trim();
+                const funText = funQuestionInput.value.trim();
+
+                if (seriousText === '' || funText === '') {
+                    alert('Por favor, completá ambos campos.');
+                    return;
+                }
+
+                // Creo la nueva fila y sus celdas
+                const newRow = document.createElement('tr');
+                newRow.className = 'practice-row border-b border-gray-200 cursor-pointer hover:bg-gray-50';
+                
+                const seriousCell = document.createElement('td');
+                seriousCell.className = 'p-4 font-semibold w-1/3';
+                seriousCell.textContent = seriousText;
+
+                const funCell = document.createElement('td');
+                funCell.className = 'p-4 answer-cell';
+                // Usé innerHTML para poder usar la etiqueta <strong> como en los ejemplos
+                funCell.innerHTML = `<strong>Transformación:</strong> ${funText}`;
+                
+                // Añado las celdas a la fila
+                newRow.appendChild(seriousCell);
+                newRow.appendChild(funCell);
+                
+                // Añado la nueva fila al principio de la tabla
+                practiceTableBody.prepend(newRow);
+
+                // Le doy a la nueva fila la misma funcionalidad de clic que a las otras
+                addToggleFunctionality(newRow);
+
+                // Limpio los campos del formulario
+                seriousQuestionInput.value = '';
+                funQuestionInput.value = '';
+            });
+
+            // --- CÓDIGO EXISTENTE PARA EL GRÁFICO ---
+            const radarCtx = document.getElementById('radarChart').getContext('2d');
+            const radarChart = new Chart(radarCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Humor', 'Profundidad', 'Exageración', 'Metáfora', 'Sorpresa', 'Relevancia'],
+                    datasets: [{
+                        label: 'Ingredientes Clave',
+                        data: [85, 90, 75, 95, 80, 100],
+                        backgroundColor: 'rgba(245, 184, 65, 0.2)',
+                        borderColor: '#F5B841',
+                        pointBackgroundColor: '#F5B841',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: '#F5B841'
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: '#D6C9B8' },
+                            grid: { color: '#E5E7EB' },
+                            pointLabels: { 
+                                font: { size: 14, weight: 'bold' },
+                                color: '#333D51'
+                            },
+                            ticks: {
+                                backdropColor: '#FDFBF8',
+                                color: '#6B7280',
+                                stepSize: 25
+                            },
+                            min: 0,
+                            max: 100
+                        }
+                    },
+                    plugins: { legend: { labels: { color: '#333D51', font: { size: 16 } } },
+                        tooltip: { callbacks: { title: function(context) { return context[0].label; } } }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
